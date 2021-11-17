@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   scope module: :customer do
 
+
     ##トップページ・アバウトページ(homes)
     root :to => 'homes#top'
     get '/about' => 'homes#about'
