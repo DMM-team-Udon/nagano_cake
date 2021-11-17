@@ -3,13 +3,11 @@ Rails.application.routes.draw do
 
   # 管理者
 
-  devise_for :admins, controllers: {
-    sessions: 'admins/sessions',
-    passwords: 'admins/passwords',
-    registrations: 'admins/registrations'
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
   }
 
-  namespace :admins do
+  namespace :admin do
     root to: 'homes#top'
     resources :customers, only: [:index,:show,:edit,:update]
     resources :orders, only: [:show,:update]
@@ -20,20 +18,25 @@ Rails.application.routes.draw do
 
   # 会員
 
-  devise_for :customers, controllers: {
-    sessions: 'customers/sessions',
-    registrations: 'customers/registrations',
-    passwords: 'customers/passwords'
+
+  devise_for :customer, controllers: {
+    sessions: 'customer/sessions',
+    registrations: 'customer/registrations',
+    passwords: 'customer/passwords'
   }
 
-  scope module: :customers do
+  scope module: :customer do
 
     ##トップページ・アバウトページ(homes)
     root :to => 'homes#top'
     get '/about' => 'homes#about'
 
     ##会員(customers)
-    resources :customers,only: [:edit, :update, :show]
+
+    resources :customers,only: [:edit, :update]
+    
+    
+    get 'customers/my_page' => 'customers#show'
 
     ##退会(quit/out)
     get 'customers/quit' => 'customers#quit'
