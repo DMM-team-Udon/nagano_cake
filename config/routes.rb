@@ -3,10 +3,8 @@ Rails.application.routes.draw do
 
   # 管理者
 
-  devise_for :admin, controllers: {
-    sessions: 'admin/sessions',
-    passwords: 'admin/passwords',
-    registrations: 'admin/registrations'
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
   }
 
   namespace :admin do
@@ -28,6 +26,7 @@ Rails.application.routes.draw do
 
   scope module: :customer do
 
+
     ##トップページ・アバウトページ(homes)
     root :to => 'homes#top'
     get '/about' => 'homes#about'
@@ -37,6 +36,7 @@ Rails.application.routes.draw do
     
     ##マイぺ
     get 'customers/my_page' => 'customers#show'
+
 
     ##退会(quit/out)
     get 'customers/quit' => 'customers#quit'
