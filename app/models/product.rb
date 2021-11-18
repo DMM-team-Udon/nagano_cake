@@ -3,9 +3,15 @@ class Product < ApplicationRecord
   
   attachment :image
   
+
   validates :name, :introduction, :price, presence: true
   
-  def add_tax
-    (self.price * 1.1).round
+  has_many :cart_items, dependent: :destroy
+  has_many :order, through: :order_detail
+  
+  ## 消費税を求めるメソッド
+  def with_tax_price
+    (self.price * 1.1).floor
   end
+  
 end
