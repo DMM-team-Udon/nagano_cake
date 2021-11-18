@@ -3,11 +3,11 @@ class Customer::CartItemsController < ApplicationController
     ##@cart_items = current_customer.cart_items.all
     @cart_items = CartItem.all
     ## 合計金額の算出
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
   end
 
   def create
-    @cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
+    @cart_item = current_customer.cart_items.find_by(product_id: params[:product_id])
   ## 追加した商品がカート内に存在するかの判別
     if @cart_item.present?
     ## 存在した場合
@@ -45,7 +45,7 @@ class Customer::CartItemsController < ApplicationController
 
   private
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :amount)
+    params.require(:cart_item).permit(:product_id, :customer_id, :quantity)
   end
 
 end

@@ -51,13 +51,14 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]
 
     ##ショッピングカート(cart_items)
-    resources :cart_items, only: [:index, :create, :update, :destroy]
-    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-
+    resources :cart_items, only: [:index, :create, :update, :destroy] do
+      delete 'destroy_all' => 'cart_items#destroy_all', on: :collection
+    end
     ##注文(orders)
-    resources :orders, only: [:index, :show, :new, :create]
-    post 'orders/confirm' => 'orders#confirm'
-    get 'orders/success' => 'orders#success'
+    resources :orders, only: [:index, :show, :new, :create] do
+      post 'confirm' => 'orders#confirm', on: :collection
+      get 'success' => 'orders#success', on: :collection
+    end
   end
 
 end
