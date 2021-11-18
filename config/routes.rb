@@ -32,9 +32,11 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
 
     ##会員(customers)
-    resources :customers,only: [:edit, :update]
+    resource :customers,only: [:edit, :update]
+
 
     ##マイぺージ
+
     get 'customers/my_page' => 'customers#show'
 
 
