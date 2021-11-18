@@ -1,0 +1,72 @@
+
+<!--カート内に商品がある場合-->
+ <!--% if @cart_items.exists? %>-->
+<div class= "container col-8">
+  <div class= "col row mt-4 mx-0">
+    <div class ="bg-light">
+      <h2>　ショッピングカート　</h2>
+    </div>
+    <div class = "col text-right">
+      <%= link_to "カートを空にする",cart_items_destroy_all_path, method: :delete,"data-confirm" => "カート内の商品を全て消去しますか？", class:'btn btn-danger' %></td>
+    </div>
+  </div>
+
+  <div class= "col  mt-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr class= "table-secondary">
+          <th style="width: 40%">商品名</th>
+          <th style="width: 15%">単価(税込)</th>
+          <th style="width: 15%">数量</th>
+          <th style="width: 15%">小計</th>
+          <th style="width: 15%"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.product.with_tax_price %></td>
+          <td>
+           <!--数量の変更-->
+            <%= form_with model: cart_items_path, method: :patch, local:true do |f| %>
+              <%= f.select :amount, *[1..9] %>
+              <%= f.submit '変更',class: 'btn btn-success' %>
+            <% end %>
+          </td>
+          <td>%= cart_item.subtotal %></td>
+          <td><%= link_to '削除する',cart_items_path, method: :delete,"data-confirm" => "商品を削除しますか？",class:'btn btn-danger' %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class= "col row mt-4 mx-0",>
+    <!--商品一覧へ-->
+    <div class= "offset-1 mr-auto">
+      <%= link_to "買い物を続ける", products_path, class: 'btn btn-primary' %>
+    </div>
+    <!--合計金額-->
+    <table class= "table table-bordered col-3 ">
+      <tr>
+        <th class= "table-secondary col-1">合計金額</th>
+        <td class= "col-1"><%= @total.round.to_s(:delimited)%></td>
+      </tr>
+    </table>
+  </div>
+
+  <!--情報入力画面へ-->
+  <div class= "text-center">
+    <%= link_to '情報入力に進む',new_order_path, class:'btn btn-success btn-lg' %>
+  </div>
+
+<!--% else %>
+  !--カート内が空の場合--
+  <div class= "text-center">
+    <h2>カート内に商品はありません。</h2>
+  </div>
+% end %>
+-->
+</div>
