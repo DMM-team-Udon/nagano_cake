@@ -1,0 +1,35 @@
+<div class= "container col-8">
+  <div class="col-3 text-center bg-light offset-1 mt-4">
+    <h2>注文情報入力</h2>
+  </div>
+
+  <%= form_with url: orders_confirm_path, local: true, method: :post do |f| %>
+  <div class= "col mt-4">
+    <h3>支払方法</h3>
+    <div class= "ml-5">
+      <%= f.radio_button :payment_method, "0" %>
+      <%= f.label :payment_method, "クレジットカード" %>
+    　<br>
+      <%= f.radio_button :payment_method, "1" %>
+      <%= f.label :payment_method, "銀行振込" %>
+    </div>
+  </div>
+
+  <div class= "col mt-2">
+    <h3>お届け先</h3>
+    <div class= "ml-5">
+      <%= f.radio_button :address, "credit_card" %>
+      <%= f.label :address, "ご自身の住所" %>
+      <br>
+      <%= f.radio_button :address, "credit_card" %>
+      <%= f.label :address, "登録済住所から選択" %>
+      <br>
+      <%= f.radio_button :address, "credit_card" %>
+      <%= f.label :address, "新しいお届け先" %>
+    </div>
+  </div>
+
+
+
+<% end %>
+</div>
