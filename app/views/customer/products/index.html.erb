@@ -7,7 +7,7 @@
           <%= attachment_image_tag(product, :image, size:"100x100", fallback:"no_image.jpg") %>
         <% end %>
         <%= link_to product.name, product_path(product) %>
-        <%= "¥"+(product.add_tax).to_s(:delimited) %>
+        <%= "¥"+(product.with_tax_price).to_s(:delimited) %>
       <% end %>
       <%= paginate @products %>
     </div>

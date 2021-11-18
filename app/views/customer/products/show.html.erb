@@ -6,7 +6,7 @@
     <div class="col-6">
       <h2><%= @product.name %></h2>
       <div><%= @product.introduction %></div>
-      <div>¥<%= (@product.add_tax).to_s(:delimited) %><span>(税込)</span></div>
+      <div>¥<%= (@product.with_tax_price).to_s(:delimited) %><span>(税込)</span></div>
       <div>
         <% if customer_signed_in? %>
           <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
