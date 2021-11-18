@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <header>
+      <%#　ーーーー 会員側ヘッダー ーーーーー%>
+      <% if customer_signed_in? %>
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # 会員
 
-  devise_for :customer, controllers: {
+  devise_for :customers, controllers: {
     sessions: 'customer/sessions',
     registrations: 'customer/registrations',
     passwords: 'customer/passwords'
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     ##会員(customers)
     resources :customers,only: [:edit, :update]
 
-    ##マイぺ
+    ##マイぺージ
     get 'customers/my_page' => 'customers#show'
 
 
