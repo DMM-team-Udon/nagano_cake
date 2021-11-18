@@ -1,9 +1,9 @@
 <div class="container px-5 px-sm-0">
+  <h2>商品一覧</h2>
   <div class="row">
     <div class="col-10 mt-3">
-      <h2>商品一覧</h2>
-      <table>
-        <thead>
+      <table class="table">
+        <thead class="table-light">
           <tr>
             <th>商品ID</th>
             <th>商品名</th>
@@ -16,14 +16,21 @@
           <% @products.each do |product| %>
           <tr>
             <td><%= product.id %></td>
-            <td><%= link_to product.name,admin_product_path %></td>
+            <td><%= link_to product.name, admin_product_path(product) %></td>
             <td><%= product.price %></td>
-            <td><%= product. %></td>
-            <td><%=  %></td>
+            <td><%= product.genre.name %></td>
+            <td>
+              <% if product.is_active == true %>
+                <p>販売中</p>
+              <% else %>
+                <p>販売停止中</p>
+              <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>
       </table>
+      <%= paginate @products %>
     </div>
   </div>
 </div>

@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     ##会員(customers)
     resources :customers,only: [:edit, :update]
 
+
     ##マイぺージ
+
     get 'customers/my_page' => 'customers#show'
 
 
