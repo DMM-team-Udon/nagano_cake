@@ -1,2 +1,38 @@
-<h1>Admin::Products#new</h1>
-<p>Find me in app/views/admin/products/new.html.erb</p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-8 mt3">
+      <h2>商品新規登録</h2>
+      <!--エラーメッセージ-->
+      <%= form_with model: @product, url:admin_products_path, local: true do |f| %>
+        <div class="">
+          <%= f.label :image, "商品画像" %>
+          <%= f.attachment_field :image %>
+        </div>
+        <div class="">
+          <%= f.label :name, "商品名" %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="">
+          <%= f.label :introduction, "商品説明" %>
+          <%= f.text_area :introduction %>
+        </div>
+        <div class="">
+          <%= f.label :genre_id, "ジャンル" %>
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %>
+        </div>
+        <div class="">
+          <%= f.label :price, "税抜価格" %>
+          <%= f.text_field :price %>
+        </div>
+        <div class="form-check">
+          <%= f.label :is_active, "販売ステータス" %>
+          <%= f.radio_button :is_active, :true %><%= f.label :is_active, "販売中" %>
+          <%= f.radio_button :is_active, :false %><%= f.label :is_active, "販売停止中" %>
+        </div>
+        <div>
+          <%= f.submit "新規登録", class:"btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
