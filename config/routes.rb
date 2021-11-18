@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get 'orders/success' => 'orders#success'
   end
   
-  devise_for :customers, controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     sessions: 'customer/sessions',
     registrations: 'customer/registrations',
     passwords: 'customer/passwords'
