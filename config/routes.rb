@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :customer do
+    get 'customers/show'
+    get 'customers/edit'
+    get 'customers/update'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # 管理者
@@ -18,7 +23,7 @@ Rails.application.routes.draw do
 
   # 会員
 
-  devise_for :customer, controllers: {
+  devise_for :customers, controllers: {
     sessions: 'customer/sessions',
     registrations: 'customer/registrations',
     passwords: 'customer/passwords'
@@ -34,7 +39,7 @@ Rails.application.routes.draw do
     ##会員(customers)
     resources :customers,only: [:edit, :update]
 
-    ##マイぺ
+    ##マイぺージ
     get 'customers/my_page' => 'customers#show'
 
 
