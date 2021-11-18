@@ -17,13 +17,7 @@ Rails.application.routes.draw do
   end
 
   # 会員
-
-  devise_for :customers, controllers: {
-    sessions: 'customer/sessions',
-    registrations: 'customer/registrations',
-    passwords: 'customer/passwords'
-  }
-
+  
   scope module: :customer do
 
 
@@ -60,5 +54,11 @@ Rails.application.routes.draw do
     post 'orders/confirm' => 'orders#confirm'
     get 'orders/success' => 'orders#success'
   end
+  
+  devise_for :customers, controllers: {
+    sessions: 'customer/sessions',
+    registrations: 'customer/registrations',
+    passwords: 'customer/passwords'
+  }
 
 end
