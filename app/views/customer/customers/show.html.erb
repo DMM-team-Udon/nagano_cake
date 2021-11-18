@@ -1,2 +1,53 @@
-<h2>マイページ</h2>
-<p>Find me in app/views/customer/customers/show.html.erb</p>
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col">
+
+      <h2>マイページ</h2>
+      
+      <div class="mb-4">
+        <h4>登録情報</h4>
+        <%= link_to "編集する", edit_customers_path %>
+      </div>
+
+      <table class="mb-4">
+        <tr>
+          <td>氏名</td>
+          <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
+        </tr>
+
+        <tr>
+          <td>カナ</td>
+          <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+        </tr>
+
+        <tr>
+          <td>郵便番号</td>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+
+        <tr>
+          <td>住所</td>
+          <td><%= @customer.address %></td>
+        </tr>
+
+        <tr>
+          <td>電話番号</td>
+          <td><%= @customer.phone_number %></td>
+        </tr>
+
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+      </table>
+
+      <div class="mb-4">
+        <h4>配送先</h4>
+        <%= link_to "一覧を見る", shipping_addresses_path %>
+      </div>
+
+      <h4>注文一覧</h4>
+        <%= link_to "一覧を見る", orders_path %>
+    </div>
+  </div>
+</div>
