@@ -1,12 +1,12 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-3">
-      <%= render "genre", genre: @genre %>
+    <div class="col-3 mt-5">
+      <%= render "genre", genre: @genres %>
     </div>
-    <div class="col-4">
+    <div class="col-4 mt-5">
       <%= attachment_image_tag @product, :image, size: "300x200", fallback: "no_image.jpg" %>
     </div>
-    <div class="col-5">
+    <div class="col-5 mt-5">
       <h2><%= @product.name %></h2>
       <div><%= @product.introduction %></div>
       <div>¥<%= (@product.with_tax_price).to_s(:delimited) %><span>(税込)</span></div>
@@ -16,7 +16,7 @@
             <%= f.hidden_field :product_id, value: @product.id %>
             <%= f.hidden_field :customer_id, value: current_customer.id %>
             <%= f.select :quantity, options_for_select((1..10).to_a), placeholder: "個数選択" %>
-            <%= f.submit "カートに入れる", class:"btn btn-secondary" %>
+            <%= f.submit "カートに入れる", class:"btn btn-sm btn-secondary" %>
           <% end %>
         <% end %>
       </div>
