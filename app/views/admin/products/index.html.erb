@@ -1,15 +1,22 @@
 <div class="container px-5 px-sm-0">
-  <h2>商品一覧</h2>
   <div class="row">
-    <div class="col-10 mt-3">
+    <h2 class="col-9">商品一覧</h2>
+    <div class="col-3">
+      <%= link_to new_admin_product_path, class:"btn btn-secondary mx-0" do %>
+        <i class="fas fa-plus-square fa-lg"></i><span>新規登録</span>
+      <% end %>
+    </div>
+  </div>
+  <div class="row  mx-0">
+    <div class="col mt-3">
       <table class="table">
-        <thead class="table-light">
+        <thead>
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
+            <th style="width: 10%">商品ID</th>
+            <th style="width: %">商品名</th>
+            <th style="width: 10%">税抜価格</th>
+            <th style="width: 30%">ジャンル</th>
+            <th style="width: 15%">ステータス</th>
           </tr>
         </thead>
         <tbody>

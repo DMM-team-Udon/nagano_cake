@@ -1,15 +1,23 @@
-
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-８mt3">
+    <div class="col-８ mt-3">
       <h2>ジャンル編集</h2>
-      <div>
-        <!--エラーメッセージ挿入-->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-８ mt-3">
+      <div class="my-4">
+        <% if @genre.errors.any? %>
+          <%= @genre.errors.count %> 件の入力ミスがあります。
+          <% @genre.errors.full_messages.each do |message| %><br>
+            <li><%= message %></li>
+          <% end %>
+        <% end %>
       </div>
       <div>
       <%= form_with model: @genre, url: admin_genre_path, local: true do |f| %>
-        <%= f.label :name, "ジャンル名" %>
-        <%= f.text_field :name %>
+        <%= f.label :name, "ジャンル名", class:"mr-4" %>
+        <%= f.text_field :name, class:"mr-4" %>
         <%= f.submit "変更を保存", class: "btn btn-sm btn-secondary" %>
       <% end %>
       </div>

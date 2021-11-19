@@ -1,38 +1,44 @@
 <div class="container px-5 px-sm-0">
   <div class="mt-3">
     <h2>商品詳細</h2>
+    <div class="text-center"><%= flash[:notice] %></div>
     <div class="row">
       <div class="col-6">
       <%= attachment_image_tag @product, :image, size: "300x200", fallback: "no_image.jpg" %>
       </div>
-      <table class="table table-borderless col-6">
-        <tr>
-          <th>商品名</th>
-          <td><%= @product.name %></td>
-        </tr>
-        <tr>
-          <th>商品説明</th>
-          <td><%= @product.introduction %></td>
-        </tr>
-        <tr>
-          <th>ジャンル</th>
-          <td><%= @product.genre.name %></td>
-        </tr>
-        <tr>
-          <th>税込価格</br>(税抜価格)</th>
-          <td><%= @product.with_tax_price.to_s(:delimited) %>(<%= @product.price %>円)</td>
-        </tr>
-        <tr>
-          <th>販売ステータス</th>
-          <td>
-            <% if @product.is_active == true %>
-              <p>販売中</p>
-            <% else %>
-              <p>販売停止中</p>
-            <% end %>
-          </td>
-        </tr>
-      </table>
+      <div class="col-6 justify-content-center">
+        <table class="table table-borderless">
+          <tr>
+            <th>商品名</th>
+            <td><%= @product.name %></td>
+          </tr>
+          <tr>
+            <th>商品説明</th>
+            <td><%= @product.introduction %></td>
+          </tr>
+          <tr>
+            <th>ジャンル</th>
+            <td><%= @product.genre.name %></td>
+          </tr>
+          <tr>
+            <th>税込価格</br>(税抜価格)</th>
+            <td><%= @product.with_tax_price.to_s(:delimited) %>(<%= @product.price %>円)</td>
+          </tr>
+          <tr>
+            <th>販売ステータス</th>
+            <td>
+              <% if @product.is_active == true %>
+                <p>販売中</p>
+              <% else %>
+                <p>販売停止中</p>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <div class="text-center">
+          <%= link_to "編集する", edit_admin_product_path(@product), class:"btn btn-secondary" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
