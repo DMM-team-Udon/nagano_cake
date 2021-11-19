@@ -7,12 +7,12 @@ class Customer::CartItemsController < ApplicationController
   end
 
   def create
-    @cart_item = current_customer.cart_items.find_by(product_id: params[:product_id])
+    @cart_item = current_customer.cart_items.find_by(product_id: params[:cart_item][:product_id])
   ## 追加した商品がカート内に存在するかの判別
     if @cart_item.present?
     ## 存在した場合
       ## カート内の個数をフォームから送られた個数分追加する
-      @cart_item.quantity += params[:quantity].to_i
+      @cart_item.quantity += params[:cart_item][:quantity].to_i
       @cart_item.save
       redirect_to cart_items_path, notice: "商品の数量を追加しました。"
     else
