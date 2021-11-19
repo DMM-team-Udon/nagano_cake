@@ -7,6 +7,18 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create!(
-  email: "abc@gmail.com",
+  email: "dd@gmail.com",
   password: "123456",
+  )
+
+
+Order.create!(
+  customer_id: 4,
+  name: "斉藤鈴木",
+  address: "東京都渋谷区",
+  postal_code: "0000000",
+  total_price: "1800",
+  payment_method: 0,
+  status: 3,
+  created_at: "2021-11-19"
   )
