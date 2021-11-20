@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   # 会員
-  
+
   scope module: :customer do
 
 
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
       get 'success' => 'orders#success', on: :collection
     end
   end
-  
+
   devise_for :customers, skip: [:passwords], controllers: {
     sessions: 'customer/sessions',
     registrations: 'customer/registrations',
