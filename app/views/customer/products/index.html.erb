@@ -1,9 +1,9 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-3">
-      <%= render "genre", genre: @genre %>
+    <div class="col-3 mt-5">
+      <%= render "genre", genre: @genres %>
     </div>
-    <div class="col-9 mt-3">
+    <div class="col-9 mt-5">
       <h2>商品一覧<span class="h4">(全 <%= @total_products.count %> 件)</span></h2>
       <div class="flex-wrap d-flex">
         <% @products.each do |product| %>
