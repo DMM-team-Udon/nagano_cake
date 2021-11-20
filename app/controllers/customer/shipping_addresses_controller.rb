@@ -16,9 +16,17 @@ class Customer::ShippingAddressesController < ApplicationController
   end
 
   def edit
+    @shipping_address = ShippingAddress.find(params[:id])
+    @shipping_address.customer_id = current_customer.id
   end
 
   def update
+    @shipping_address = ShippingAddress.find(params[:id])
+    if @shipping_address.update(shipping_address_params)
+      redirect_to shipping_addresses_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
