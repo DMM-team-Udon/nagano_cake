@@ -1,7 +1,7 @@
 class Customer::OrdersController < ApplicationController
   def new
     @order = Order.new
-    ##order_address = current_customer.shipping_addresses
+    @order_address = current_customer.shipping_addresses
   end
 
   def create
@@ -43,7 +43,7 @@ class Customer::OrdersController < ApplicationController
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
       ## 登録した配送先を選択した場合
-      @address = ShippingAddress.find(params[:order][:address_id])
+      @address = ShippingAddress.find(params[:order][:dear_address])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
@@ -59,9 +59,13 @@ class Customer::OrdersController < ApplicationController
   end
 
   def index
+    @order = current_customer.orders
+    @order = Order.page(params[:page]).per(8)
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: params[:id])
   end
 
   private

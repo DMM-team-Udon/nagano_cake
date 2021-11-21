@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   validates :name, :introduction, :price, presence: true
 
   has_many :cart_items, dependent: :destroy
-  has_many :order, through: :order_detail
+  has_many :order_detail
 
 
 
