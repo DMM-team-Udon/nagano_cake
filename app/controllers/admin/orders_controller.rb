@@ -6,20 +6,15 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def update
-    order = Order.find(params[:id])
-    order_details = order.order_details
-    if order.update(order_params)
-      if order.status == " payment_confirm"
-         order_details.each { |order_detail|
-         order_detail.update_attributes(production_status: "waiting_productio")
-         }
-      end
-
-      redirect_to admin_order_path(order)
-    else
-      redirect_to request.referer
+  def update #注文ステータスの更新
+  @order = Order.find(params[:id])
+  @order.update(order_params)
+  if @order.payment_confirm?
+    @order.order_details.each do |order_detail|
+      order_detail.waiting_production!
     end
+  end
+  redirect_to admin_order_path
   end
 
   private

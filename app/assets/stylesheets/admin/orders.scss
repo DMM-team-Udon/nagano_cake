@@ -1,3 +1,18 @@
 // Place all the styles related to the admin/Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.order_total th {
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+table.order_detail th {
+  padding-right: 50px;
+  padding-bottom: 20px;
+}
+
+table.order_detail td {
+  padding-bottom: 20px;
+}
+
