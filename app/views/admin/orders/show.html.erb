@@ -4,30 +4,85 @@
   </div>
 
   <div class ="row">
-    <div class = "justify-content-center">
+    <div class = "col-md-auto offset-md-2">
     <table class = "order_detail">
     <tr>
       <th>購入者</th>
-      <td></td>
+      <td>
+      </td>
     </tr>
     <tr>
       <th>注文日</th>
-      <td></td>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
     </tr>
     <tr>
       <th>配送先</th>
-      <td></td>
+      <td>〒<%= @order.postal_code %> <%= @order.address %></td>
     </tr>
     <tr>
-      <th>支払い方法</th>
-      <td></td>
+      <th>支払方法</th>
+      <td><%= @order.payment_method_i18n %></td>
     </tr>
     <tr>
       <th>注文ステータス</th>
-      <td></td>
+      <td>
+
+          <%= form_with url: admin_order_path(@order), model:@order, method: :patch, local:true do |f| %>
+            <%= f.select :status, Order.statuses_i18n.invert, {}, {class: "mr-5",required: true} %>
+        <%= f.submit "更新", class:  "btn",style: "background-color: #333333; color: white;"  %>
+        <%end%>
+      </td>
     </tr>
     </table>
+    </div>
+  </div>
 
+  <div class = "row">
+    <div class = "col-8">
+    <table class = "table">
+      <thead>
+        <th scope = "col">商品名</th>
+        <th scope = "col">単価(税込)</th>
+        <th scope = "col">数量</th>
+        <th scope = "col">小計</th>
+        <th scope = "col">制作ステータス</th>
+      </thead>
+       <% @order.order_details.each do |order_detail| %>
+      <tbody>
+        <tr>
+        <td><%= order_detail.product.name %></td>
+         <% @order_detail_price = order_detail.price %>
+         <td></td>
+        <td><%= order_detail.quantity %></td>
+        <td></td>
+        <td>
+          <%= form_with url: admin_order_detail_path(order_detail), model:order_detail, method: :patch, local:true do |f| %>
+          <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert, {},{class: "mr-5",required: true}%>
+          <%= f.submit "更新", class: "btn",style: "background-color: #333333; color: white;" %>
+          <% end %>
+        </td>
+        <% end %>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+
+
+    <div class = "col-4">
+      <table class = "order_total">
+        <tr>
+          <th>商品合計</th>
+          <td><%= @order.total_price %>円</td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.postage %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= @order.total_price.to_s(:postage) %>円</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
