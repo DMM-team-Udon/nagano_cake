@@ -1,1 +1,72 @@
-<h2>注文履歴詳細</h2>
+<div class= "container col-8">
+  <div class="col-3 text-center bg-light offset-1 mt-4">
+    <h2>注文履歴詳細</h2>
+  </div>
+
+  <div class= "col-4  mt-4">
+    <h4>注文情報</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th class="table-secondary">注文日</th>
+        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary align-middle">配送先</th>
+        <td>
+          <%= "〒" + @order.postal_code %><br>
+          <%= @order.address %><br>
+          <%= @order.name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table-secondary">支払方法</th>
+        <td><%= @order.payment_method_i18n %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">ステータス</th>
+        <td><%= @order.status_i18n %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class= "col-4">
+    <h4>請求情報</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th class="table-secondary">商品合計</th>
+        <td><%= (@order.total_price - @order.postage).to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">配送料</th>
+        <td><%= @order.postage %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary"><strong>ご請求額</strong></th>
+        <td><%= @order.total_price.to_s(:delimited) %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class= "col-4">
+    <h4>注文内容</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr class= "table-secondary">
+          <th style="width: 15%">商品</th>
+          <th style="width: 30%">単価(税込)</th>
+          <th style="width: 15%">個数</th>
+          <th style="width: 10%">小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.product.name %></td>
+          <td><%= order_detail.price.to_s(:delimited) %></td>
+          <td><%= order_detail.quantity %></td>
+          <td><%= (order_detail.price * order_detail.quantity).to_s(:delimited) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

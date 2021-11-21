@@ -26,9 +26,9 @@
         </div>
       <br>
       <%= f.radio_button :select_address, "1" %>
-      <%= f.label :select_address, "登録済住所から選択(未完成)" %>
+      <%= f.label :select_address, "登録済住所から選択" %>
         <div class= "ml-4">
-          <!-- %= f.select :address, options_from_collection_for_select(shipping_addresses.all, :id, :full_address) %>-->
+          <%= f.select :dear_address, options_from_collection_for_select(ShippingAddress.all, :id, :full_address) %>
         </div>
       <br>
       <%= f.radio_button :select_address, "2" %>
