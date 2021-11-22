@@ -4,7 +4,12 @@
   </div>
 
   <%= form_with model: @customer, url: admin_customer_path, method: :patch, local: true do |f| %>
-    <%= render "admin/shared/error_messages", resource: f.object %>
+      <% if @customer.errors.any? %>
+        <%= @customer.errors.count %>件のエラーが発生しました
+        <% @customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
 
     <div class="row mx-0">
       <div class="col mt-3">
