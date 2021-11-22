@@ -16,3 +16,16 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+body{
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif ;
+}
+
+.main-visual{
+  width: 100%;
+  min-height: 350px;
+  background-image: url(top-image.jpeg);
+  background-size: cover;
+  background-position: center center;
+  padding: 10px;
+}
