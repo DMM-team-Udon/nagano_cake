@@ -1,3 +1,6 @@
+<div class= "text-center text-danger mt-4">
+  <h2><%= flash[:notice] %></h2>
+</div>
 <div class= "container col-8">
   <div class="col-3 text-center bg-light offset-1 mt-4">
     <h2>注文情報入力</h2>
@@ -25,11 +28,20 @@
           <%= "#{current_customer.last_name} #{current_customer.first_name}" %>
         </div>
       <br>
-      <%= f.radio_button :select_address, "1" %>
-      <%= f.label :select_address, "登録済住所から選択" %>
-        <div class= "ml-4">
-          <%= f.select :dear_address, options_from_collection_for_select(ShippingAddress.all, :id, :full_address) %>
-        </div>
+      <!--配送先が登録されていない場合はラジオボタンを非選択に-->
+      <% if @order_address.exists? %>
+        <%= f.radio_button :select_address, "1" %>
+        <%= f.label :select_address, "登録済住所から選択" %>
+          <div class= "ml-4">
+            <%= f.select :dear_address, options_from_collection_for_select(@order_address, :id, :full_address) %>
+          </div>
+      <% else %>
+          <%= f.radio_button :select_address, "1", disabled: true %>
+          <%= f.label :select_address, "登録済住所から選択" %>
+          <div class= "ml-4">
+            <%= "登録したお届け先はありません。" %>
+          </div>
+      <% end %>
       <br>
       <%= f.radio_button :select_address, "2" %>
       <%= f.label :select_address, "新しいお届け先" %>

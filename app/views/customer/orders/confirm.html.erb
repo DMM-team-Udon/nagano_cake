@@ -1,56 +1,60 @@
-<div class= "container col-8">
+<div class= "container col-8 ">
   <div class="col-3 text-center bg-light offset-1 mt-4">
     <h2>注文情報確認</h2>
   </div>
-  <div ="col row">
+  <div class="col row d-flex align-items-start mt-4">
    <!--テーブル1つ目-->
-    <table class="table table-bordered col-6">
-      <thead>
-        <tr class= "table-secondary">
-          <th>商品名</th>
-          <th>単価(税込)</th>
-          <th>数量</th>
-          <th>小計</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cart_items.each do |cart_item| %>
-        <tr>
-          <td>
-            <%= attachment_image_tag cart_item.product, :image, size: "75x50", fallback: "no_image.jpg" %>
-            <%= cart_item.product.name %>
-          </td>
-          <td><%= cart_item.product.with_tax_price.to_s(:delimited) %></td>
-          <td>
-            <%= "#{cart_item.quantity}個" %>
-          </td>
-          <td><%= cart_item.subtotal.to_s(:delimited) %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="col-8">
+      <table class="table table-bordered ">
+        <thead>
+          <tr class= "table-secondary">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag cart_item.product, :image, size: "75x50", fallback: "no_image.jpg" %>
+              <%= cart_item.product.name %>
+            </td>
+            <td><%= cart_item.product.with_tax_price.to_s(:delimited) %></td>
+            <td>
+              <%= "#{cart_item.quantity}個" %>
+            </td>
+            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
    <!--テーブル2つ目-->
-    <table class="table table-bordered col-2">
-      <tr>
-        <th class="table-secondary">送料</th><td><%= @order.postage %></td>
-      </tr>
-      <tr>
-        <th class="table-secondary">商品合計</th><td><%= @total.round.to_s(:delimited)%></td>
-      </tr>
-      <tr>
-        <th class="table-secondary">請求金額</th><td><%= @order.total_price.to_s(:delimited) %></td>
-      </tr>
-    </table>
+    <div class="col-3">
+      <table class="table table-bordered">
+        <tr>
+          <th class="table-secondary">送料</th><td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">商品合計</th><td><%= @total.round.to_s(:delimited)%></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">請求金額</th><td><%= @order.total_price.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <div class="col">
-    <strong>支払方法</strong>
+  <div class="col mt-4">
+    <strong>支払方法</strong>&emsp;
     <%= @order.payment_method_i18n %>
   </div>
 
-  <div class="col">
-    <strong>お届け先</strong>
-    <%= "〒#{@order.postal_code} #{@order.address}" %><br>&emsp;&emsp;&emsp;&emsp;
+  <div class="col mt-4">
+    <strong>お届け先</strong>&emsp;
+    <%= "〒#{@order.postal_code} #{@order.address}" %><br>&emsp;&emsp;&emsp;&emsp;&emsp;
     <%= "#{@order.name}" %>
   </div>
 

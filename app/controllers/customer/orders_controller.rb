@@ -1,4 +1,7 @@
 class Customer::OrdersController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
     @order_address = current_customer.shipping_addresses
@@ -8,22 +11,24 @@ class Customer::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.status = 0
-    @order.save
-
-    ## order_detailsに情報を記録
-    @cart_items = current_customer.cart_items.all
-    @cart_items.each do |cart_item|
-      @order_detail = OrderDetail.new
-      @order_detail.product_id = cart_item.product_id
-      @order_detail.order_id = @order.id
-      @order_detail.quantity = cart_item.quantity
-      @order_detail.price = cart_item.product.with_tax_price
-      @order_detail.production_status = 0
-      @order_detail.save
+    if @order.save
+      ## order_detailsに情報を記録
+      @cart_items = current_customer.cart_items.all
+      @cart_items.each do |cart_item|
+        @order_detail = OrderDetail.new
+        @order_detail.product_id = cart_item.product_id
+        @order_detail.order_id = @order.id
+        @order_detail.quantity = cart_item.quantity
+        @order_detail.price = cart_item.product.with_tax_price
+        @order_detail.production_status = 0
+        @order_detail.save
+      end
+      ## カート内商品を全て消去
+      current_customer.cart_items.destroy_all
+      redirect_to success_orders_path
+    else
+      redirect_to  new_order_path, notice: "お届け先が正しく入力されていません。お届け先をご確認ください。"
     end
-    ## カート内商品を全て消去
-    current_customer.cart_items.destroy_all
-    redirect_to success_orders_path
   end
 
   def confirm
@@ -31,7 +36,7 @@ class Customer::OrdersController < ApplicationController
     ## 支払い方法どちらを選択したか
     @order.payment_method = params[:order][:payment_method]
     ## total_priceの算出
-    @cart_items = current_customer.cart_items
+    @cart_items = CartItem.where(customer_id: current_customer.id)
     @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
     @order.postage = 800
     @order.total_price = @order.postage.to_i + @total.round.to_i
@@ -59,8 +64,8 @@ class Customer::OrdersController < ApplicationController
   end
 
   def index
-    @order = current_customer.orders
-    @order = Order.page(params[:page]).per(8)
+    @current_orders = current_customer.orders
+    @orders = @current_orders.page(params[:page]).per(8).order("id DESC")
   end
 
   def show
