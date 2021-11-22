@@ -3,8 +3,8 @@
     <h2>商品詳細</h2>
     <div class="text-center"><%= flash[:notice] %></div>
     <div class="row">
-      <div class="col-6">
-      <%= attachment_image_tag @product, :image, size: "300x200", fallback: "no_image.jpg" %>
+      <div class="col-6 text-right">
+      <%= attachment_image_tag @product, :image, size: "400x300", fallback: "no_image.jpg" %>
       </div>
       <div class="col-6 justify-content-center">
         <table class="table table-borderless">
@@ -28,9 +28,9 @@
             <th>販売ステータス</th>
             <td>
               <% if @product.is_active == true %>
-                <p>販売中</p>
+                <p class="text-success">販売中</p>
               <% else %>
-                <p>販売停止中</p>
+                <p class="text-secon">販売停止中</p>
               <% end %>
             </td>
           </tr>

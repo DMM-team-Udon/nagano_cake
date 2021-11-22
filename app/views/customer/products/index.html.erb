@@ -1,29 +1,31 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-3 mt-5">
+    <div class="col-2">
       <%= render "genre", genre: @genres %>
     </div>
-    <div class="col-9 mt-5">
+    <div class="col-10">
       <h2>商品一覧<span class="h4">(全 <%= @total_products.count %> 件)</span></h2>
-      <div class="flex-wrap d-flex">
-        <% @products.each do |product| %>
-          <div class="card w-50 mx-auto mt-4 shadow-lg">
-            <%= link_to product_path(product) do %>
-              <%= attachment_image_tag product, :image, size:"200x200", fallback:"no_image.jpg" %>
-            <% end %>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <%= link_to product.name, product_path(product) %></br>
-                  <%= "¥"+(product.with_tax_price).to_s(:delimited) %>
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-eq-height">
+          <% @products.each do |product| %>
+            <div class="col">
+              <div class="card mx-auto mt-4 shadow-lg">
+                <%= link_to product_path(product) do %>
+                  <%= attachment_image_tag product, :image, size:"200x200", class:"card-img-top", fallback:"no_image.jpg" %>
+                <% end %>
+                <div class="card-body">
+                  <div class="card-title">
+                    <%= link_to product.name, product_path(product), class:"text-dark" %></br>
+                    <%= "¥"+(product.with_tax_price).to_s(:delimited) %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
-        <div class="text-center">
-          <%= paginate @products %>
+          <% end %>
         </div>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <%= paginate @products %>
       </div>
     </div>
   </div>
