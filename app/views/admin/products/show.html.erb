@@ -1,10 +1,14 @@
 <div class="container px-5 px-sm-0">
   <div class="mt-3">
     <h2>商品詳細</h2>
-    <div class="text-center"><%= flash[:notice] %></div>
+    <div class="text-center text-success my-3">
+      <h3>
+      <%= flash[:notice] %>
+      </h3>
+    </div>
     <div class="row">
       <div class="col-6 text-right">
-      <%= attachment_image_tag @product, :image, size: "400x300", fallback: "no_image.jpg" %>
+      <%= attachment_image_tag @product, :image, size: "350x250", fallback: "no_image.jpg" %>
       </div>
       <div class="col-6 justify-content-center">
         <table class="table table-borderless">

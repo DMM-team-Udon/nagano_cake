@@ -1,53 +1,49 @@
 <div class="container px-5 px-sm-0">
-  <div class="row mx-5">
-    <div class="col">
+  <div class="row">
+    <div class="col-8">
       <h2>商品新規登録</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col d-flex justify-content-center">
-      <div>
-        <% if @product.errors.any? %>
-          <%= @product.errors.count %> 件の入力ミスがあります。
-          <% @product.errors.full_messages.each do |message| %><br>
-            <li><%= message %></li>
-          <% end %>
-        <% end %>
+  <div>
+    <% if @product.errors.any? %>
+      <%= @product.errors.count %> 件の入力ミスがあります。
+      <% @product.errors.full_messages.each do |message| %><br>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="row mt-4 justify-content-center">
+    <%= form_with model: @product, url:admin_products_path, local: true do |f| %>
+      <div class="row mb-3">
+        <%= f.label :image, "商品画像",class:"col-4" %>
+        <%= f.attachment_field :image,class:"col-8" %>
       </div>
-      <div class="row mt-3">
-        <%= form_with model: @product, url:admin_products_path, local: true do |f| %>
-          <div class="row mb-3">
-            <%= f.label :image, "商品画像",class:"col-4" %>
-            <%= f.attachment_field :image,class:"col-8" %>
-          </div>
-          <div class="row mb-3">
-            <%= f.label :name, "商品名",class:"col-4" %>
-            <%= f.text_field :name,class:"col-8" %>
-          </div>
-          <div class="row mb-3">
-            <%= f.label :introduction, "商品説明",class:"col-4" %>
-            <%= f.text_area :introduction,class:"col-8" %>
-          </div>
-          <div class="row mb-3">
-            <%= f.label :genre_id, "ジャンル",class:"col-4" %>
-            <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--",class:"col-8" %>
-          </div>
-          <div class="row mb-3">
-            <%= f.label :price, "税抜価格",class:"col-4" %>
-            <%= f.text_field :price,class:"col-8" %>
-          </div>
-          <div class="row mb-3">
-            <%= f.label :is_active, "販売ステータス",class:"col-4" %>
-            <div class="col-5">
-              <%= f.radio_button :is_active, :true %><span>  <%= f.label :is_active, "販売中"%>  </span>
-              <%= f.radio_button :is_active, :false %><span>  <%= f.label :is_active, "販売停止中"%> </span>
-            </div>
-          </div>
-          <div class="text-center">
-            <%= f.submit "新規登録", class:"btn btn-secondary" %>
-          </div>
-        <% end %>
+      <div class="row mb-3">
+        <%= f.label :name, "商品名",class:"col-4" %>
+        <%= f.text_field :name,class:"col-8" %>
       </div>
-    </div>
+      <div class="row mb-3">
+        <%= f.label :introduction, "商品説明",class:"col-4" %>
+        <%= f.text_area :introduction,class:"col-8" %>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :genre_id, "ジャンル",class:"col-4" %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--",class:"col-8" %>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :price, "税抜価格",class:"col-4" %>
+        <%= f.text_field :price,class:"col-8" %>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :is_active, "販売ステータス",class:"col-4" %>
+        <div class="col-5">
+          <%= f.radio_button :is_active, :true %><span>  <%= f.label :is_active, "販売中"%>  </span>
+          <%= f.radio_button :is_active, :false %><span>  <%= f.label :is_active, "販売停止中"%> </span>
+        </div>
+      </div>
+      <div class="text-center">
+        <%= f.submit "新規登録", class:"btn btn-secondary" %>
+      </div>
+    <% end %>
   </div>
 </div>

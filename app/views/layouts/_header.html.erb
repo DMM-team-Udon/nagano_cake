@@ -1,9 +1,9 @@
 <header class="bg-secondary mb-5">
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <%= link_to "ながのCake", root_path, class:"navbar-brand p-3"  %>
+      <%= link_to image_tag("logo.png", size: "100x100"), root_path, class:"navbar-brand p-3" %>
       <% if customer_signed_in? %>
-        <p class="text-dark p-2 m-0">ようこそ<strong><%= current_customer.first_name %></strong>さん！</p>
+        <p class="text-light p-2 m-0">ようこそ<strong><%= current_customer.last_name %></strong>さん！</p>
       <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
