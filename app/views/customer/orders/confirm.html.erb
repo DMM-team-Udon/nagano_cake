@@ -1,5 +1,5 @@
 <div class= "container col-8 ">
-  <div class="col-3 text-center bg-light offset-1 mt-4">
+  <div class="col-3 text-center  mt-4">
     <h2>注文情報確認</h2>
   </div>
   <div class="col row d-flex align-items-start mt-4">
@@ -21,11 +21,11 @@
               <%= attachment_image_tag cart_item.product, :image, size: "75x50", fallback: "no_image.jpg" %>
               <%= cart_item.product.name %>
             </td>
-            <td><%= cart_item.product.with_tax_price.to_s(:delimited) %></td>
+            <td><%= "¥" + cart_item.product.with_tax_price.to_s(:delimited) %></td>
             <td>
               <%= "#{cart_item.quantity}個" %>
             </td>
-            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+            <td><%= "¥" + cart_item.subtotal.to_s(:delimited) %></td>
           </tr>
           <% end %>
         </tbody>
@@ -35,13 +35,13 @@
     <div class="col-3">
       <table class="table table-bordered">
         <tr>
-          <th class="table-secondary">送料</th><td><%= @order.postage %></td>
+          <th class="table-secondary">送料</th><td><%= "¥" + @order.postage.to_s(:delimited) %></td>
         </tr>
         <tr>
-          <th class="table-secondary">商品合計</th><td><%= @total.round.to_s(:delimited)%></td>
+          <th class="table-secondary">商品合計</th><td><%= "¥" + @total.round.to_s(:delimited) %></td>
         </tr>
         <tr>
-          <th class="table-secondary">請求金額</th><td><%= @order.total_price.to_s(:delimited) %></td>
+          <th class="table-secondary">請求金額</th><td><%= "¥" + @order.total_price.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -54,7 +54,8 @@
 
   <div class="col mt-4">
     <strong>お届け先</strong>&emsp;
-    <%= "〒#{@order.postal_code} #{@order.address}" %><br>&emsp;&emsp;&emsp;&emsp;&emsp;
+    <%= "〒#{@order.postal_code}" %><br>&emsp;&emsp;&emsp;&emsp;&emsp;
+    <%= "#{@order.address}" %><br>&emsp;&emsp;&emsp;&emsp;&emsp;
     <%= "#{@order.name}" %>
   </div>
 

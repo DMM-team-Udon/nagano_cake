@@ -5,8 +5,8 @@
 <% if @cart_items.exists? %>
 <div class= "container col-8">
   <div class= "col row mt-4 mx-0">
-    <div class ="bg-light">
-      <h2>　ショッピングカート　</h2>
+    <div>
+      <h2>ショッピングカート</h2>
     </div>
     <div class = "col text-right">
       <%= link_to "カートを空にする",destroy_all_cart_items_path, method: :delete,"data-confirm" => "カート内の商品を全て消去しますか？", class:'btn btn-danger' %></td>
@@ -32,7 +32,7 @@
             <%= attachment_image_tag cart_item.product, :image, size: "150x100", fallback: "no_image.jpg" %>
             <%= cart_item.product.name %>
           </td>
-          <td><%= cart_item.product.with_tax_price.to_s(:delimited) %></td>
+          <td><%= "¥" + cart_item.product.with_tax_price.to_s(:delimited) %></td>
           <td>
             <%= "#{cart_item.quantity}個" %>
             <!--数量の変更-->
@@ -43,7 +43,7 @@
               <%= f.submit '変更',class: 'btn btn-success' %>
             <% end %>
           </td>
-          <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+          <td><%= "¥" + cart_item.subtotal.to_s(:delimited) %></td>
           <td><%= link_to '削除する',cart_item_path(cart_item.id), method: :delete,"data-confirm" => "商品を削除しますか？",class:'btn btn-danger' %></td>
         </tr>
         <% end %>
@@ -54,13 +54,13 @@
   <div class= "col row mt-4 mx-0",>
     <!--商品一覧へ-->
     <div class= "offset-1 mr-auto">
-      <%= link_to "買い物を続ける", products_path, class: 'btn btn-primary btn-lg' %>
+      <%= link_to "買い物を続ける", root_path, class: 'btn btn-primary btn-lg' %>
     </div>
     <!--合計金額-->
     <table class= "table table-bordered col-3 ">
       <tr>
         <th class= "table-secondary col-1">合計金額</th>
-        <td class= "col-1"><%= @total.round.to_s(:delimited)%></td>
+        <td class= "col-1"><%= "¥" + @total.round.to_s(:delimited)%></td>
       </tr>
     </table>
   </div>
@@ -74,7 +74,8 @@
   <!--カート内が空の場合-->
   <div class= "text-center mt-4">
     <h2>カート内に商品はありません。</h2>
-    <%= link_to "買い物を続ける", products_path, class: 'btn btn-primary' %>
+    <br>
+    <%= link_to "買い物を続ける", root_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
 </div>
