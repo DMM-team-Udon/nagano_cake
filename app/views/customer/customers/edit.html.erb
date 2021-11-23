@@ -12,43 +12,43 @@
           <% end %>
         <% end %>
 
-        <table class="mb-4">
+        <table class="table mb-4">
           <tr>
-            <td>氏名</td>
+            <th>氏名</th>
             <td><%= f.text_field :last_name %></td>
             <td><%= f.text_field :first_name %></td>
           </tr>
 
           <tr>
-            <td>カナ</td>
+            <th>カナ</th>
             <td><%= f.text_field :last_name_kana %></td>
             <td><%= f.text_field :first_name_kana %></td>
           </tr>
 
           <tr>
-            <td>郵便番号（ハイフンなし）</td>
+            <th>郵便番号（ハイフンなし）</th>
             <td><%= f.text_field :postal_code %></td>
           </tr>
 
           <tr>
-            <td>住所</td>
+            <th>住所</th>
             <td><%= f.text_field :address %></td>
           </tr>
 
           <tr>
-            <td>電話番号（ハイフンなし）</td>
+            <th>電話番号（ハイフンなし）</th>
             <td><%= f.text_field :phone_number %></td>
           </tr>
 
           <tr>
-            <td>メールアドレス</td>
+            <th>メールアドレス</th>
             <td><%= f.email_field :email%></td>
           </tr>
 
           <tr>
             <td></td>
             <td><%= f.submit "編集内容を保存", class:"btn btn-secondary btn-secondary-simple mt-5" %></td>
-            <td><%= link_to "退会する", customers_quit_path, class:"btn btn-secondary btn-secondary-simple mt-5" %></td>
+            <td><%= link_to "退会する", customers_quit_path, class:"btn btn-danger mt-5" %></td>
           </tr>
         </table>
       <% end %>
