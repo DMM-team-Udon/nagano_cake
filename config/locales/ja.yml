@@ -46,5 +46,8 @@ ja: # 日本語の設定を行う
         phone_number: "電話番号"
         email: "メールアドレス"
         password: "パスワード"
-        
-        
+
+      shipping_address:
+        postal_code: "郵便番号"
+        address: "住所"
+        name: "宛名"
