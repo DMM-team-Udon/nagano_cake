@@ -2,7 +2,7 @@
   <h2><%= flash[:notice] %></h2>
 </div>
 <div class= "container col-8">
-  <div class="col-3 text-center bg-light offset-1 mt-4">
+  <div class="col-3 text-center mt-4">
     <h2>注文情報入力</h2>
   </div>
 
@@ -24,7 +24,8 @@
       <%= f.radio_button :select_address, "0", checked: true %>
       <%= f.label :select_address, "ご自身の住所" %>
         <div class="ml-4">
-          <%= "〒#{current_customer.postal_code} #{current_customer.address}" %><br>
+          <%= "〒#{current_customer.postal_code}" %><br>
+          <%= "#{current_customer.address}" %><br>
           <%= "#{current_customer.last_name} #{current_customer.first_name}" %>
         </div>
       <br>
