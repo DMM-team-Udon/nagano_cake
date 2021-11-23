@@ -1,16 +1,22 @@
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row mt-5 mb-5">
     <div class="col">
       <h2>新規会員登録</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "customer/shared/error_messages", resource: resource %>
+
+        <% if @customer.errors.any? %>
+          <%= @customer.errors.count %>件のエラーが発生しました
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        <% end %>
 
         <div class="name-group">
           <%= f.label :"名前" %><br />
-          <%= f.label :last_name, "(姓)" %>
+          <%= f.label :last_name, "(姓)　" %>
           <%= f.text_field :last_name, autofocus: true, autocomplete: "family-name", placeholder: "令和" %>
-          <%= f.label :first_name, "(名)" %>
+          <%= f.label :first_name, "　　(名)" %>
           <%= f.text_field :first_name, autocomplete: "given-name", placeholder: "道子" %>
         </div>
 
@@ -18,11 +24,11 @@
           <%= f.label :"フリガナ" %><br />
           <%= f.label :last_name_kana, "(セイ)" %>
           <%= f.text_field :last_name_kana, autocomplete: "family-name", placeholder: "レイワ" %>
-          <%= f.label :first_name_kana, "(メイ)" %>
+          <%= f.label :first_name_kana, "　(メイ)" %>
           <%= f.text_field :first_name_kana, autocomplete: "given-name", placeholder: "ミチコ" %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
           <%= f.label :email, "メールアドレス" %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
         </div>
@@ -43,10 +49,7 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :password, "パスワード(６文字以上)" %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
+          <%= f.label :password, "パスワード(６文字以上)" %><br />
           <%= f.password_field :password, autocomplete: "new-password" %>
         </div>
 
@@ -56,7 +59,7 @@
         </div>
 
         <div class="actions mb-4">
-          <%= f.submit "新規登録" %>
+          <%= f.submit "新規登録", class:"btn btn-secondary btn-secondary-simple" %>
         </div>
       <% end %>
 

@@ -4,7 +4,14 @@
 
       <h2>会員情報編集</h2>
       <%= form_with model: current_customer, url: customers_path, local: true do |f|%>
-        <%= render "customer/shared/error_messages", resource: f.object %>
+
+        <% if @customer.errors.any? %>
+          <%= @customer.errors.count %>件のエラーが発生しました
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        <% end %>
+
         <table class="mb-4">
           <tr>
             <td>氏名</td>
@@ -40,8 +47,8 @@
 
           <tr>
             <td></td>
-            <td><%= f.submit "編集内容を保存", class: "btn btn-success mt-5" %></td>
-            <td><%= link_to "退会する", customers_quit_path, class:"btn btn-danger mt-5" %></td>
+            <td><%= f.submit "編集内容を保存", class:"btn btn-secondary btn-secondary-simple mt-5" %></td>
+            <td><%= link_to "退会する", customers_quit_path, class:"btn btn-secondary btn-secondary-simple mt-5" %></td>
           </tr>
         </table>
       <% end %>
