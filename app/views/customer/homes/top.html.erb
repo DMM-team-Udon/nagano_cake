@@ -17,7 +17,7 @@
             <h1>ようこそ、<strong>ながのCAKE</strong> へ！</h1>
             <h5 class="mt-5">
               このサイトは、ケーキ販売のECサイトになります。</br>
-              会員出ない方も商品の閲覧はできますが、</br>
+              会員でない方も商品の閲覧はできますが、</br>
               購入には会員登録が必要になります。
             </h5>
           </div>
@@ -30,7 +30,7 @@
             <div class="col">
               <div class="card mx-auto mt-4 shadow-lg">
                 <%= link_to product_path(product) do %>
-                  <%= attachment_image_tag product, :image, size:"200x200", class:"card-img-top cover",fallback:"no_image.jpg" %>
+                  <%= attachment_image_tag product, :image, size:"250x200", class:"card-img-top cover",fallback:"no_image.jpg" %>
                 <% end %>
                 <div class="card-body">
                   <h6 class="card-title">
